@@ -1,30 +1,30 @@
 # Minecraft Circuits
 
-Convert digital logic (Verilog or a Yosys-style netlist) into **Minecraft redstone block layouts**. Design only — no game connection. Usable from Node, scripts, or any LLM.
+**LLM-friendly redstone from logic.** Turn Verilog or a netlist into Minecraft block layouts. No game connection — design only. Built for **LLM-based runs**: your model generates Verilog or a netlist, this library turns it into buildable redstone. Works in Node, scripts, or any LLM pipeline.
+
+**Runs out of the box.** Clone the repo — no `npm install`, no runtime dependencies. Netlist path needs nothing else; Yosys is optional (only for Verilog).
 
 Redstone gate and routing logic was extracted from [Mindcraft](https://github.com/mindcraft-bots/mindcraft) (by [Kolby Nottingham](https://kolbynottingham.com/mindcraft) / mindcraft-bots). This package is a standalone, dependency-free version for use outside the full Mindcraft stack.
 
 [![npm version](https://img.shields.io/npm/v/minecraft-circuits.svg)](https://www.npmjs.com/package/minecraft-circuits)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Install
+## Runs out of the box
 
-**From npm (in your app):**
+```bash
+git clone https://github.com/RyanRana/minecraft-circuts.git
+cd minecraft-circuts
+npm test          # no install needed — sanity check (no Yosys)
+npm run example   # netlist → redstone example
+```
+
+No `npm install` in the repo. Zero runtime dependencies. Optional: [Yosys](https://yosyshq.readthedocs.io/) (e.g. `brew install yosys`) only if you use `circuitFromVerilog`.
+
+## Install (as a dependency)
 
 ```bash
 npm install minecraft-circuits
 ```
-
-**From repo (zero install — works out of the box):**
-
-```bash
-git clone https://github.com/RyanRana/minecraft-circuts.git
-cd minecraft-circuits
-npm test          # quick sanity check (no Yosys needed)
-npm run example   # run the netlist example
-```
-
-No `npm install` is required in the repo: the package has **no runtime dependencies**. Optional: install [Yosys](https://yosyshq.readthedocs.io/) (e.g. `brew install yosys`) only if you use `circuitFromVerilog`. Netlist-only usage needs nothing else.
 
 ## Quick start
 
@@ -78,17 +78,17 @@ const design2 = netlistToRedstone(netlist, 'redstone_lamp');
 | `validateCircuitDesign(design)` | Require `blocks` and (block, dx, dy, dz); fill `size` if missing. |
 | `validateCircuitPlan(plan)` | Validate plan structure. |
 
-### Prompts (for LLMs)
+### LLM usage (prompts)
 
-Import and send to your model:
+Designed for **LLM-based runs**: feed a prompt to your model, get Verilog or JSON, then run it through this package. No extra setup.
 
-- `VERILOG_PROMPT` — generate Verilog from a description.
-- `DESIGNER_PROMPT` — generate block design from a plan.
-- `PLANNER_PROMPT` — generate a circuit plan.
-- `CORRECTOR_PROMPT` — fix invalid design JSON.
+- **`VERILOG_PROMPT`** — have the LLM generate Verilog from a natural-language description → `circuitFromVerilog(verilog)`.
+- **`DESIGNER_PROMPT`** — have the LLM generate a block design from a plan → `parseJSON` + `validateCircuitDesign`.
+- **`PLANNER_PROMPT`** — have the LLM produce a circuit plan.
+- **`CORRECTOR_PROMPT`** — have the LLM fix invalid design JSON.
 
 ```js
-import { VERILOG_PROMPT, DESIGNER_PROMPT } from 'minecraft-circuits';
+import { VERILOG_PROMPT, DESIGNER_PROMPT, circuitFromVerilog, parseJSON, validateCircuitDesign } from 'minecraft-circuits';
 // or: import { VERILOG_PROMPT } from 'minecraft-circuits/prompts';
 ```
 
