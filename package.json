@@ -1,0 +1,43 @@
+{
+  "name": "minecraft-circuits",
+  "version": "1.0.0",
+  "description": "Convert digital logic (Verilog or netlist) to Minecraft redstone block layouts. Design-only, no game connection. For Node, scripts, and LLMs.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./prompts": "./src/prompts.js"
+  },
+  "files": [
+    "index.js",
+    "src/",
+    "LICENSE",
+    "example.js",
+    "test-run.js"
+  ],
+  "scripts": {
+    "test": "node test-run.js",
+    "example": "node example.js"
+  },
+  "keywords": [
+    "minecraft",
+    "redstone",
+    "circuit",
+    "verilog",
+    "yosys",
+    "netlist",
+    "llm"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RyanRana/minecraft-circuts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RyanRana/minecraft-circuts/issues"
+  },
+  "homepage": "https://github.com/RyanRana/minecraft-circuts#readme",
+  "engines": {
+    "node": ">=18"
+  }
+}
