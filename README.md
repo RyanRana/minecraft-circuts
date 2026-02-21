@@ -1,5 +1,7 @@
 # Minecraft Circuits
 
+![Screenshot](screenshot.png)
+
 **LLM-friendly redstone from logic.** Turn Verilog or a netlist into Minecraft block layouts. No game connection — design only. Built for **LLM-based runs**: your model generates Verilog or a netlist, this library turns it into buildable redstone. Works in Node, scripts, or any LLM pipeline.
 
 **Runs out of the box.** Clone the repo — no `npm install`, no runtime dependencies. Netlist path needs nothing else; Yosys is optional (only for Verilog).
